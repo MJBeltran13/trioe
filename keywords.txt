@@ -1,2 +1,2 @@
-BUCO_PI	KEYWORD1
+Trioe	KEYWORD1
 readTemperature	KEYWORD2
