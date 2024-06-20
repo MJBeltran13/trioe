@@ -8,9 +8,6 @@ In this activity, you will learn how to control multiple external LEDs by blinki
 - [Materials Needed](#materials-needed)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
 
 ## Introduction
 
@@ -35,59 +32,21 @@ This project demonstrates how to control multiple external LEDs using a microcon
    - Connect the other end of each resistor to the ground (GND) pin on the microcontroller.
 
 2. **Software Setup:**
-   - If using an Arduino, download and install the [Arduino IDE](https://www.arduino.cc/en/software).
+   - First, you need to download the Trioe library. You can find it on GitHub or another repository that hosts it.
+   - Install the Trioe library into your Arduino IDE. Here’s how you can do it:
+     - Open your Arduino IDE.
+     - Go to `Sketch -> Include Library -> Manage Libraries...`.
+     - In the Library Manager, search for "Trioe" and install it.
+   - After installing the library, you need to open the example code for Smart_Building_Kit_Beginner_Blink_Act_3:
+     - Go to `File -> Examples -> Trioe -> Smart_Building_Kit_Beginner_Blink_Act_3`.
    - Connect your Arduino to your computer using a USB cable.
 
 ## Usage
 
 1. **Arduino Code:**
 
-   - Open the Arduino IDE.
-   - Copy and paste the following code into the IDE:
-
-     ```cpp
-     // Pin numbers where the LEDs are connected
-     const int ledPins[] = {8, 9, 10};
-
-     void setup() {
-       // Initialize the digital pins as outputs
-       for (int i = 0; i < 3; i++) {
-         pinMode(ledPins[i], OUTPUT);
-       }
-     }
-
-     void loop() {
-       // Turn each LED on and off in sequence
-       for (int i = 0; i < 3; i++) {
-         digitalWrite(ledPins[i], HIGH);  // Turn the LED on
-         delay(1000);                     // Wait for a second
-         digitalWrite(ledPins[i], LOW);   // Turn the LED off
-         delay(1000);                     // Wait for a second
-       }
-     }
-     ```
-
    - Select the correct board and port from the Tools menu.
-   - Click the Upload button to upload the code to the Arduino.
+   - Click the Upload button to upload the code to the microcontroller.
 
 2. **Running the Code:**
    - Once the code is uploaded, the LEDs should start blinking sequentially with a 1-second interval.
-
-## Contributing
-
-Contributions are welcome! Please follow these steps to contribute:
-
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature-branch`).
-3. Make your changes.
-4. Commit your changes (`git commit -m 'Add some feature'`).
-5. Push to the branch (`git push origin feature-branch`).
-6. Open a Pull Request.
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-## Contact
-
-For any questions or suggestions, feel free to open an issue or contact us at [your-email@example.com].
