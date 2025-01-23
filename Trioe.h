@@ -2,13 +2,16 @@
 #define Trioe_H
 
 #include <Arduino.h>
+#include <WiFi.h>
+#include <HTTPClient.h>
 
-class Trioe {
-  public:
-    BUCO_PI(int pin);
-    float readTemperature();
-  private:
-    int _pin;
+class Trioe
+{
+public:
+  Trioe();
+  bool postData(const char *serverURL, const char *jsonPayload);
+
+private:
 };
 
 #endif
