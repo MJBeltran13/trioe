@@ -35,7 +35,7 @@ This library offers:
 Make sure you have the following installed or available:
 
 - **Arduino IDE** (latest version recommended).
-- Supported microcontroller boards (e.g., ESP32, ESP8266).
+- Supported TRIOE microcontroller boards (e.g., ESP32, ESP8266).
 - Necessary libraries for sensors and actuators included in your kit.
 
 ---
