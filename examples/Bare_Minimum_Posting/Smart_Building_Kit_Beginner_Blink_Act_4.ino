@@ -19,5 +19,5 @@ void loop()
     Serial.println("Posted!"); 
   else 
     Serial.println("Failed!");
-  delay(60000);
+  delay(3000);
 }
