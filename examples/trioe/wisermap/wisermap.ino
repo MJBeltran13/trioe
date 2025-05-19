@@ -3,8 +3,8 @@
 #include <ESP8266HTTPClient.h>
 #include <ArduinoJson.h>
 
-const char* ssid = "BatStateU ICT";
-const char* password = "Leading Innovations, Transforming Lives";
+const char* ssid = "ssid";
+const char* password = "password";
 const char* server_url = "https://api-bucopi.parallaxed.ph/create-user"; // Server endpoint for creating user
 
 // Set up the client object
@@ -28,8 +28,8 @@ void loop() {
   JsonObject values = jsonBuffer.to<JsonObject>();
   values["longitude"] = 13.795401313088945;
   values["latitude"] = 121.00048467851241;
-  values["name"] = "MJ Bauan";
-  values["address"] = "Bauan, Batangas";
+  values["name"] = "name";
+  values["address"] = "address";
   values["temp"] = 12.2;
   values["humidity"] = 12.2;
   values["airquality"] = 12.2;
