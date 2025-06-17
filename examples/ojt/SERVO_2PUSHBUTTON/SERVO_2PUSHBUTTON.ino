@@ -1,4 +1,4 @@
-#include <ESP32Servo.h>
+#include <TrioeServo.h>
 
 Servo myservo;
 

@@ -39,7 +39,7 @@ This project implements a **Bluetooth Low Energy (BLE) Server** using an **TRIOE
 ### 1. Install Dependencies
 Make sure you have the following libraries installed in the **Arduino IDE**:
 - `ArduinoJson`
-- `ESP32 BLE Arduino`
+- `Trioe BLE Arduino`
 
 ### 2. Upload the Code
 1. Connect your **TRIOE Board** to your computer via USB.
@@ -55,9 +55,9 @@ Make sure you have the following libraries installed in the **Arduino IDE**:
 Once connected, observe the **Serial Monitor** for incoming data:
 ```
 Client Connected
-Received Value: {"rssi":-65,"message":"Hello from ESP32 client","temperature":28.0}
+Received Value: {"rssi":-65,"message":"Hello from Trioe client","temperature":28.0}
 RSSI: -65
-Message: Hello from ESP32 client
+Message: Hello from Trioe client
 Temperature: 28.0°C
 ```
 

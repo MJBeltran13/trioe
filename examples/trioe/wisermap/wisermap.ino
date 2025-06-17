@@ -3,23 +3,29 @@
 #include <ESP8266HTTPClient.h>
 #include <ArduinoJson.h>
 
-const char* ssid = "ssid";
-const char* password = "password";
-const char* server_url = "https://api-bucopi.parallaxed.ph/create-user"; // Server endpoint for creating user
+const char* ssid = "YOUR_WIFI_SSID";
+const char* password = "YOUR_WIFI_PASSWORD";
+const char* server_url = "https://api-bucopi.parallaxed.ph/create-user";
 
-// Set up the client object
-WiFiClientSecure client; // WiFiClientSecure for HTTPS
+WiFiClientSecure client;
 HTTPClient http;
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
+  
+  Serial.println("Starting ESP8266...");
+  Serial.print("Connecting to WiFi: ");
+  Serial.println(ssid);
   
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    Serial.print(".");
+    delay(1000);
+    Serial.println("Connecting to WiFi...");
   }
-  Serial.println("WiFi connected");
+  
+  Serial.println("WiFi Connected!");
+  Serial.print("IP Address: ");
+  Serial.println(WiFi.localIP());
 }
 
 void loop() {
@@ -36,23 +42,28 @@ void loop() {
   values["pressure"] = 12.2;
   values["altitude"] = 12.2;
 
-  // Serialize JSON to string
   String jsonStr;
   serializeJson(values, jsonStr);
 
-  client.setInsecure(); // Ignore SSL certificate verification
+  Serial.println("Sending data:");
+  Serial.println(jsonStr);
+
+  client.setInsecure();
 
   http.begin(client, server_url);
   http.addHeader("Content-Type", "application/json");
   int httpCode = http.POST(jsonStr);
+  
   if (httpCode > 0) {
     if (httpCode == HTTP_CODE_OK || httpCode == HTTP_CODE_MOVED_PERMANENTLY) {
       String payload = http.getString();
+      Serial.println("Data sent successfully!");
       Serial.print("Response: ");
       Serial.println(payload);
     }
   } else {
-    Serial.printf("[HTTP] POST... failed, error: %s\n", http.errorToString(httpCode).c_str());
+    Serial.println("Data send failed!");
+    Serial.printf("HTTP POST failed, error: %s\n", http.errorToString(httpCode).c_str());
   }
   http.end();
   

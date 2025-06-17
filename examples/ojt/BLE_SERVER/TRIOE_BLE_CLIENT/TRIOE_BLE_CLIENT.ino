@@ -9,7 +9,7 @@
 
 #define SERVICE_UUID        "12345678-1234-5678-1234-56789abcdef0"
 #define CHARACTERISTIC_UUID "abcdef01-1234-5678-1234-56789abcdef0"
-#define LED_PIN 2  // Built-in LED on ESP32-S3
+#define LED_PIN 2  // Built-in LED on Trioe-S3
 
 BLEClient* pClient;
 BLEAdvertisedDevice* myDevice;
@@ -45,7 +45,7 @@ void sendData() {
     // Create JSON data with RSSI and temperature (28°C)
     StaticJsonDocument<200> doc;
     doc["rssi"] = rssi;
-    doc["message"] = "Hello from ESP32 client";
+    doc["message"] = "Hello from Trioe client";
     doc["temperature"] = 28.0;  // Adding temperature value
 
     char jsonBuffer[512];
@@ -73,7 +73,7 @@ void setup() {
   pinMode(LED_PIN, OUTPUT);
   digitalWrite(LED_PIN, LOW);  // Initialize LED to OFF
 
-  BLEDevice::init("ESP32-S3_BLE_Client");
+  BLEDevice::init("Trioe-S3_BLE_Client");
 
   BLEScan* pBLEScan = BLEDevice::getScan();
   pBLEScan->setAdvertisedDeviceCallbacks(new MyAdvertisedDeviceCallbacks());
@@ -89,7 +89,7 @@ void loop() {
   if (pClient && pClient->isConnected()) {
     sendData();
   } else {
-    Serial.println("ESP32 is not connected.");
+    Serial.println("Trioe is not connected.");
     digitalWrite(LED_PIN, LOW);  // Turn LED OFF when not connected
     if (myDevice) {
       connectToServer();  // Reconnect if not connected

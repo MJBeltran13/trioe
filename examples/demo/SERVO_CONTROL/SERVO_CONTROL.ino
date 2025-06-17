@@ -1,4 +1,4 @@
-#include <ESP32Servo.h>
+#include <TrioeServo.h>
 
 #define POTENTIOMETER_PIN 1  // GPIO32 (ADC-capable)
 #define SERVO_PIN 4           // GPIO4 (PWM-capable)

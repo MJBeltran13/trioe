@@ -1,6 +1,6 @@
-#define TRIGGER_PIN  5 // D5 on ESP32
-#define ECHO_PIN     4 // D4 on ESP32
-#define RELAY_PIN    2 // D2 on ESP32
+#define TRIGGER_PIN  5 // D5 on Trioe
+#define ECHO_PIN     4 // D4 on Trioe
+#define RELAY_PIN    2 // D2 on Trioe
 
 void setup() {
     Serial.begin(115200);

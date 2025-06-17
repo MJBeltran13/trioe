@@ -6,7 +6,7 @@
 
 ## Overview
 
-TRIOE is a library designed to simplify IoT development using affordable learning kits. It’s built for anyone looking to explore the Internet of Things with minimal barriers to entry.
+TRIOE is a library designed to simplify IoT development using affordable learning kits. It's built for anyone looking to explore the Internet of Things with minimal barriers to entry.
 
 ---
 
@@ -35,7 +35,7 @@ This library offers:
 Make sure you have the following installed or available:
 
 - **Arduino IDE** (latest version recommended).
-- Supported TRIOE microcontroller boards (e.g., ESP32, ESP8266).
+- Supported TRIOE microcontroller boards (e.g., Trioe, ESP8266).
 - Necessary libraries for sensors and actuators included in your kit.
 
 ---

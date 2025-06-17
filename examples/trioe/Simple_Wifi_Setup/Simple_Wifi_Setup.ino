@@ -2,8 +2,8 @@
 #include <WebServer.h>
 
 // WiFi credentials
-const char* ssid = "BatStateU-DevOps";  // Replace with your WiFi network name
-const char* password = "Dev3l$06";      // Replace with your WiFi password
+const char* ssid = "ssid";  // Replace with your WiFi network name
+const char* password = "password";      // Replace with your WiFi password
 
 // LED pin
 const int ledPin = 2;
@@ -88,7 +88,7 @@ void handleRoot() {
                                                            "</style>"
                                                            "</head>"
                                                            "<body>"
-                                                           "<h1>ESP32-S3 LED Control</h1>"
+                                                           "<h1>Trioe-S3 LED Control</h1>"
                                                            "<p>LED is currently "
                 + String(ledState ? "ON" : "OFF") + "</p>"
                                                     "<a href='/toggle'><button class='button'>"

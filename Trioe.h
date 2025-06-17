@@ -10,6 +10,7 @@ class Trioe
 public:
   Trioe();
   bool postData(const char *serverURL, const char *jsonPayload);
+  int postDataWithApiKey(const char *serverURL, const char *jsonPayload, const char *apiKey);
 
 private:
 };

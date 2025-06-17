@@ -3,7 +3,7 @@
 #include <BLEServer.h>
 #include <ArduinoJson.h>
 
-#define LED_PIN 2  // Built-in LED on ESP32-S3
+#define LED_PIN 2  // Built-in LED on Trioe-S3
 
 // BLE Service and Characteristic UUIDs
 #define SERVICE_UUID        "12345678-1234-5678-1234-56789abcdef0"
@@ -62,7 +62,7 @@ void setup() {
   digitalWrite(LED_PIN, LOW);  // Initialize LED to OFF
 
   // Create BLE Device
-  BLEDevice::init("ESP32-S3_BLE_Server");
+  BLEDevice::init("Trioe-S3_BLE_Server");
 
   // Create BLE Server
   pServer = BLEDevice::createServer();

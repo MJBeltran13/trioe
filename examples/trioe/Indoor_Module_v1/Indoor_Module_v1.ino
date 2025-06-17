@@ -13,39 +13,42 @@ Adafruit_BME280 bme;
 #define MQ135_PIN A0
 MQ135 gasSensor = MQ135(MQ135_PIN);
 
-// WiFi credentials
-const char* ssid = "password";
-const char* password = "password";
-float temperature = 25.0; // Example temperature value in Celsius
-float humidity = 60.0; // Example humidity value in percentage
+const char* ssid = "YOUR_WIFI_SSID";
+const char* password = "YOUR_WIFI_PASSWORD";
+
+float temperature = 25.0;
+float humidity = 60.0;
 float globalCorrectedPPM = 0.0;
 
 WiFiClientSecure client;
 HTTPClient http;
 
-const char* server_url = "https://api-bucopi.parallaxed.ph/create-user"; // Server endpoint for creating user
+const char* server_url = "https://api-bucopi.parallaxed.ph/create-user";
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
 
-  // Initialize BME280 sensor
+  Serial.println("Starting ESP8266...");
+  Serial.println("Initializing BME280 sensor...");
+
   if (!bme.begin(0x76)) {
     Serial.println("Could not find a valid BME280 sensor, check wiring!");
     while (1);
   }
+  
+  Serial.println("BME280 sensor initialized!");
 
-  // Connect to WiFi
-  Serial.print("Connecting to WiFi");
+  Serial.print("Connecting to WiFi: ");
+  Serial.println(ssid);
   WiFi.begin(ssid, password);
 
   while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    Serial.print(".");
+    delay(1000);
+    Serial.println("Connecting to WiFi...");
   }
 
-  Serial.println();
-  Serial.println("Connected to WiFi");
-  Serial.print("IP address: ");
+  Serial.println("WiFi Connected!");
+  Serial.print("IP Address: ");
   Serial.println(WiFi.localIP());
 }
 
@@ -56,25 +59,26 @@ void loop() {
 }
 
 void bme280() {
+  Serial.println("Sensor Readings:");
   Serial.print("Temperature = ");
   Serial.print(bme.readTemperature());
-  Serial.println("*C");
+  Serial.println("°C");
 
   Serial.print("Pressure = ");
   Serial.print(bme.readPressure() / 100.0F);
-  Serial.println("hPa");
+  Serial.println(" hPa");
 
-  Serial.print("Approx. Altitude = ");
+  Serial.print("Altitude = ");
   Serial.print(bme.readAltitude(SEALEVELPRESSURE_HPA));
-  Serial.println("m");
+  Serial.println(" m");
 
   Serial.print("Humidity = ");
   Serial.print(bme.readHumidity());
-  Serial.println("%");
+  Serial.println(" %");
 
   Serial.println();
-  temperature = bme.readTemperature(); // Example temperature value in Celsius
-  humidity = bme.readHumidity(); // Example humidity value in percentage
+  temperature = bme.readTemperature();
+  humidity = bme.readHumidity();
   delay(1000);
 }
 
@@ -85,7 +89,7 @@ void airquality() {
   float ppm = gasSensor.getPPM();
   float correctedPPM = gasSensor.getCorrectedPPM(temperature, humidity);
 
-  // Display the results on the Serial Monitor
+  Serial.println("Air Quality Readings:");
   Serial.print("Sensor Resistance: ");
   Serial.print(resistance);
   Serial.println(" Ohms");
@@ -106,7 +110,6 @@ void airquality() {
   Serial.print(correctedPPM);
   Serial.println(" ppm");
   globalCorrectedPPM = correctedPPM;
-
 }
 
 void sending_to_wiser() {
@@ -124,23 +127,28 @@ void sending_to_wiser() {
     values["pressure"] = bme.readPressure() / 100.0F;
     values["altitude"] = bme.readAltitude(SEALEVELPRESSURE_HPA);
 
-    // Serialize JSON to string
     String jsonStr;
     serializeJson(values, jsonStr);
 
-    client.setInsecure(); // Ignore SSL certificate verification
+    Serial.println("Sending data:");
+    Serial.println(jsonStr);
+
+    client.setInsecure();
 
     http.begin(client, server_url);
     http.addHeader("Content-Type", "application/json");
     int httpCode = http.POST(jsonStr);
+    
     if (httpCode > 0) {
       if (httpCode == HTTP_CODE_OK || httpCode == HTTP_CODE_MOVED_PERMANENTLY) {
         String payload = http.getString();
+        Serial.println("Data sent successfully!");
         Serial.print("Response: ");
         Serial.println(payload);
       }
     } else {
-      Serial.printf("[HTTP] POST... failed, error: %s\n", http.errorToString(httpCode).c_str());
+      Serial.println("Data send failed!");
+      Serial.printf("HTTP POST failed, error: %s\n", http.errorToString(httpCode).c_str());
     }
     http.end();
 

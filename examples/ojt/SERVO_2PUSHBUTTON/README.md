@@ -32,7 +32,7 @@ The provided code controls a servo motor based on button inputs. When Button 1 i
 
 ### Key Features:
 - Includes the following library:
-- ESP32Servo
+- TrioeServo
 - Controls servo movement based on button inputs
 - Enables precise angle adjustment for automated access control
 

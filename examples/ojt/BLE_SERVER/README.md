@@ -12,7 +12,7 @@ The client communicates with the server via a predefined BLE service and charact
 
 ## Software Requirements
 - Arduino IDE
-- ESP32 Board Manager
+- Trioe Board Manager
 - Required Libraries:
   - `BLEDevice.h`
   - `BLEUtils.h`
@@ -61,7 +61,7 @@ Connecting to Server...
 Connected!
 RSSI: -45
 JSON Data Sent.
-ESP32 is not connected.
+Trioe is not connected.
 Reconnecting...
 ```
 
