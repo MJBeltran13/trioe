@@ -15,7 +15,7 @@ void setup()
 
 void loop()
 {
-  if (trioe.postData(serverURL, R"({"streams":[{"name":"Temperature","type":"number","value":27,"unit":"celsius"}]}")) 
+  if (trioe.postData(serverURL, R"json({"streams":[{"name":"Temperature","type":"number","value":27,"unit":"celsius"}]})json"))
     Serial.println("Posted!"); 
   else 
     Serial.println("Failed!");
