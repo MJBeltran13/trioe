@@ -95,9 +95,20 @@ bool TrioeClient::fetchState() {
   if (!_http.begin(_secureClient, _stateEndpoint)) return false;
   _http.setReuse(true); _http.addHeader("Authorization", "Bearer " + _apiKey); _lastHttpStatus = _http.GET();
   if (_lastHttpStatus < 200 || _lastHttpStatus >= 300) { _http.end(); return false; }
+  const String response = _http.getString();
+  _http.end();
   StaticJsonDocument<TRIOE_JSON_DOCUMENT_SIZE> doc;
-  const DeserializationError error = deserializeJson(doc, _http.getStream()); _http.end();
-  if (error || !doc["data"].is<JsonArray>()) return false;
+  const DeserializationError error = deserializeJson(doc, response);
+  if (error) {
+    Serial.print("TRIOE JSON error: ");
+    Serial.println(error.c_str());
+    return false;
+  }
+  if (!doc["data"].is<JsonArray>()) {
+    Serial.println("TRIOE response has no data array:");
+    Serial.println(response);
+    return false;
+  }
   for (JsonObjectConst stream : doc["data"].as<JsonArrayConst>()) {
     if (_stateHandler) _stateHandler(stream);
     const char* name = stream["name"] | "";
