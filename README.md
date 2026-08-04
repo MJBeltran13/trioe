@@ -58,6 +58,9 @@ learning-kit examples. It supports:
 - Current-state polling with named typed callbacks
 - Change thresholds and configurable reporting intervals
 
+Version 3.2.7 improves state polling so integer-valued numeric streams, such as
+humidity values reported as `60`, trigger numeric callbacks correctly.
+
 Install **ArduinoJson 6** before compiling the Hub examples.
 
 ### Publish telemetry

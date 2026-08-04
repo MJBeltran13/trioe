@@ -106,7 +106,7 @@ bool TrioeClient::fetchState() {
     if (!name[0]) continue;
     for (uint8_t i = 0; i < _readingSubscriptionCount; ++i) {
       if ((!strcmp(type, "number") || !strcmp(type, "integer")) &&
-          value.is<double>() && !strcmp(name, _readingSubscriptions[i].name) && _readingSubscriptions[i].handler) {
+          !value.isNull() && !strcmp(name, _readingSubscriptions[i].name) && _readingSubscriptions[i].handler) {
         _readingSubscriptions[i].handler(value.as<float>());
       }
     }

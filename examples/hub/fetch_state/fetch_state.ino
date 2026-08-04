@@ -19,6 +19,9 @@ void setup() {
   trioe.onReading("temperature", [](float value) {
     Serial.printf("Temperature: %.2f C\n", value);
   });
+  trioe.onReading("humidity", [](float value) {
+    Serial.printf("Humidity: %.2f %%\n", value);
+  });
   trioe.onText("message", [](const char* value) {
     Serial.println(value);
   });
